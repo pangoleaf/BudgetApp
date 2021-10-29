@@ -62,7 +62,6 @@ class BudgetApp:
         pass
     
     def load_from_file(self, filename):
-        self.load_file = ""
         with open(f"{self.sav_dir}/{filename}", "r") as f:
             saved = f.read()
         return eval(saved)
@@ -228,6 +227,7 @@ class BudgetApp:
             if yn.upper() == "N":
                 return
 
+        self.load_file = ""
         with open(f"{self.sav_dir}/{save_name}", "w") as f:
             f.write(repr(self))
         self.filename = save_name
