@@ -1,7 +1,7 @@
 # me
 saves/*
 !saves/test_data
-
+.vscode
 
 
 # github template
