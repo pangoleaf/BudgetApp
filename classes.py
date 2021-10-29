@@ -33,6 +33,23 @@ class BudgetApp:
             with open(f"{self.sav_dir}/{self.load}", "r") as f:
                 saved = f.read()
             return eval(saved)
+        
+        if self.setup_done:
+            say("app_welcome_back", self.username)
+            self.print_budgets()
+        else:
+            say("app_welcome")
+
+        while not self.setup_done:
+            new_or_load = valid("nw_or_ld", self.in_list, ["NEW", "LOAD"], f_ask="not_n_or_l")
+
+            if new_or_load.upper() == "NEW":
+                self.setup()
+
+            elif new_or_load.upper() == "LOAD":
+                load_file = self.load_chooser()
+                if load_file != "CANCEL":
+                    return BudgetApp(load_file)
 
         return self.run()
 
@@ -97,9 +114,16 @@ class BudgetApp:
     def cat_adjust(self, cat, amount):
         [b for b in self.budgets if b.category == cat][0].adjust(amount)
 
-    def get_new_amt(self, f_to, f_frm=""):
+    def get_new_amt(self, fund_to, fund_from=""):
         return valid(
-            "asgn_amt", self.vl_new_amt, f_to, f_frm, s_args=(f_frm), f_say="nt_engh", fs_args=(f_to, f_frm), num=True
+            "asgn_amt",
+            self.vl_new_amt,
+            fund_to,
+            fund_from,
+            s_as=(fund_from),
+            f_say="nt_engh",
+            fs_as=(fund_to, fund_from),
+            num=True,
         )
 
     # VALIDATION FNS
@@ -185,7 +209,7 @@ class BudgetApp:
     def save_to_file(self):
         save_name = ask("sv_save_name")
         if self.save_file_exists(save_name):
-            yn = valid("sv_ovrwrt", self.in_list, ["Y", "N"], s_args=(save_name), f_ask="i_nt_yn")
+            yn = valid("sv_ovrwrt", self.in_list, ["Y", "N"], s_as=(save_name), f_ask="nt_yn")
             if yn.upper() == "N":
                 return
 
@@ -217,22 +241,5 @@ class BudgetApp:
         self.commands[command.upper()]()
 
     def run(self):
-        if self.setup_done:
-            say("app_welcome_back", self.username)
-            self.print_budgets()
-        else:
-            say("app_welcome")
-
-        while not self.setup_done:
-            new_or_load = valid("nw_or_ld", self.in_list, ["NEW", "LOAD"], f_ask="not_n_or_l")
-
-            if new_or_load.upper() == "NEW":
-                self.setup()
-
-            elif new_or_load.upper() == "LOAD":
-                load_file = self.load_chooser()
-                if load_file != "CANCEL":
-                    return BudgetApp(load_file)
-
         while not self.exit:
             self.route_command(ask("i_what_do"))

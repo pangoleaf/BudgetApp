@@ -18,7 +18,7 @@ script = {
     "creating_misc": "Creating Misc budget with remaining money of value [[[0]]]",
     "i_gt_zero": "Must be a positive value, try again...",
     "i_needs_num": "I need that to be a number, try again...",
-    "i_nt_yn": "That's got to be Y or N. Try again...",
+    "nt_yn": "That's got to be Y or N. Try again...",
     "i_what_do": "What can I do for you? (type COMMANDS to see available commands)",
     "i_commands": "Available commands are: [[[0]]]",
     "i_not_command": "Command not found. Make sure you're spelling it right.",
@@ -83,13 +83,13 @@ def ask(key, *args, num=False):
     return given
 
 
-def valid(script, val_fn, *args, s_args=(), f_say="", fs_args=(), f_ask="", fa_args=(), num=False):
+def valid(script, val_fn, *args, s_as=(), f_say="", fs_as=(), f_ask="", fa_as=(), num=False):
     ask_on_fail = f_ask or script
 
-    given = ask(script, *s_args, num=num)
+    given = ask(script, *s_as, num=num)
     while not val_fn(given, *args):
         if f_say:
-            say(f_say, *fs_args)
-        given = ask(ask_on_fail, *fa_args, num=num)
+            say(f_say, *fs_as)
+        given = ask(ask_on_fail, *fa_as, num=num)
 
     return given
