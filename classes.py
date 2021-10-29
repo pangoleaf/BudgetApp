@@ -22,6 +22,8 @@ class BudgetApp:
     setup_done: bool = False
     filename: str = ""
 
+    test_mode: bool = False
+
     sav_dir = "./saves"
     unb = "Unbudgeted"
     exit = False
@@ -33,7 +35,7 @@ class BudgetApp:
             with open(f"{self.sav_dir}/{self.load}", "r") as f:
                 saved = f.read()
             return eval(saved)
-        
+
         if self.setup_done:
             say("app_welcome_back", self.username)
             self.print_budgets()
@@ -241,5 +243,5 @@ class BudgetApp:
         self.commands[command.upper()]()
 
     def run(self):
-        while not self.exit:
+        while not self.exit and not self.test_mode:
             self.route_command(ask("i_what_do"))

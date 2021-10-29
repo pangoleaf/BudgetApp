@@ -1,5 +1,7 @@
 # me
 saves/*
+!saves/test_data
+
 
 
 # github template
