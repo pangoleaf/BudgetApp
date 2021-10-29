@@ -47,7 +47,7 @@ script = {
     "not_n_or_l": "Command needs to be NEW or LOAD, try again...",
     "ld_load_file": "What is the name of the file you would like to load?",
     "ld_not_a_file": "Sorry, [[[0]]] is not an existing saved file, try again... (or type CANCEL to cancel loading)",
-    "not_cat": "That's not an existing category.",
+    "not_cat": "That's not an existing category (warning: categories are CaSe SeNsItIvE)",
     "total_at_start": "Total funds input: [[[0]]]",
 }
 
