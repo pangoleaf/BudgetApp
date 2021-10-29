@@ -1,1 +1,1 @@
-BudgetApp(load='', username='Matt', total_input_money=115, budgets=[Budget(category='Food', value=40), Budget(category='Clothes', value=10), Budget(category='Misc', value=25), Budget(category='Tickets', value=10)], setup_done=True, filename='matt')
+BudgetApp(load_file='', username='Matt', total_input_money=115, budgets=[Budget(category='Food', value=40), Budget(category='Clothes', value=10), Budget(category='Misc', value=25), Budget(category='Tickets', value=10)], setup_done=True, filename='matt')
